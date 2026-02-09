@@ -1,9 +1,9 @@
+export const runtime = "nodejs" // Required for DNS lookups
+
 import { NextRequest, NextResponse } from "next/server"
 import { requireMerchant } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { resolveTxt } from "node:dns/promises"
-
-export const runtime = "nodejs" // Required for DNS lookups
 
 export async function POST(request: NextRequest) {
   try {
