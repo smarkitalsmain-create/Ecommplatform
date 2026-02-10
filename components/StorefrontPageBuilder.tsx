@@ -434,7 +434,7 @@ export function StorefrontPageBuilder({
         <CardContent>
           {sections.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              Select "Add section" to start building your page.
+              {'Select "Add section" to start building your page.'}
             </p>
           ) : !selectedSection ? (
             <p className="text-sm text-muted-foreground">

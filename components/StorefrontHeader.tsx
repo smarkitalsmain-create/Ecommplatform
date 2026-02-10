@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/hooks/use-cart"
@@ -22,9 +23,11 @@ export function StorefrontHeader({ storeSlug, storeName, logoUrl }: StorefrontHe
         <div className="flex items-center justify-between">
           <Link href={`/s/${storeSlug}`} className="flex items-center gap-3">
             {logoUrl && (
-              <img
+              <Image
                 src={logoUrl}
                 alt={storeName}
+                width={40}
+                height={40}
                 className="h-10 w-10 rounded object-cover"
               />
             )}

@@ -14,6 +14,7 @@ import { createProduct, updateProduct } from "@/app/actions/products"
 import { useToast } from "@/hooks/use-toast"
 import { paiseToInr } from "@/lib/utils/currency"
 import { Plus, X, Loader2 } from "lucide-react"
+import Image from "next/image"
 import { uploadToCloudinary } from "@/lib/cloudinary"
 
 interface ProductFormProps {
@@ -338,10 +339,11 @@ export function ProductForm({ product }: ProductFormProps) {
                       </div>
                     ) : image.url ? (
                       <>
-                        <img
+                        <Image
                           src={image.url}
                           alt={image.alt || `Product image ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                         />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <Button

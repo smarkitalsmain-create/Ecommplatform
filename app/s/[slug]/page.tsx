@@ -300,9 +300,11 @@ function renderThemeStorefront(
         <main className="container mx-auto px-4 py-8">
           {logoUrl && (
             <div className="mb-8 text-center">
-              <img
+              <Image
                 src={logoUrl}
                 alt={storeTitle}
+                width={96}
+                height={96}
                 className="h-24 w-24 mx-auto rounded-lg object-cover"
               />
             </div>
