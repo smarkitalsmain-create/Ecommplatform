@@ -95,7 +95,7 @@ export async function POST(
           orderId: order.id,
           type: "SYSTEM",
           message: `Shipment updated (${courierName}, AWB: ${awb})`,
-          oldValue: null,
+          // Omit oldValue when there's no previous value (optional Json? field)
           newValue: { courierName, awb, trackingUrl },
           createdBy: "MERCHANT",
         },

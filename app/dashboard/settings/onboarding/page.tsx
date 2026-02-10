@@ -27,7 +27,7 @@ export default async function OnboardingSettingsPage() {
           panNumber: onboarding.panNumber,
           panName: onboarding.panName,
           panDobOrIncorp: onboarding.panDobOrIncorp
-            ? onboarding.panDobOrIncorp.toISOString()
+            ? onboarding.panDobOrIncorp.toISOString().slice(0, 10)
             : null,
           panHolderRole: onboarding.panHolderRole,
           gstStatus: onboarding.gstStatus,

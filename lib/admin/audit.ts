@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma"
 import { headers } from "next/headers"
+import { Prisma } from "@prisma/client"
+import { optionalJson } from "@/lib/prismaJson"
 
 export interface AuditLogInput {
   actorUserId: string
@@ -8,9 +10,9 @@ export interface AuditLogInput {
   entityType: string
   entityId?: string | null
   reason: string
-  beforeJson?: any
-  afterJson?: any
-  metadata?: any
+  beforeJson?: Prisma.InputJsonValue | null
+  afterJson?: Prisma.InputJsonValue | null
+  metadata?: Prisma.InputJsonValue | null
 }
 
 /**
@@ -31,11 +33,12 @@ export async function logAdminAction(input: AuditLogInput): Promise<void> {
       entityType: input.entityType,
       entityId: input.entityId || null,
       reason: input.reason,
-      beforeJson: input.beforeJson ? (input.beforeJson as any) : null,
-      afterJson: input.afterJson ? (input.afterJson as any) : null,
+      // Omit optional JSON fields when null/undefined (preferred for optional Json? fields)
+      beforeJson: optionalJson(input.beforeJson),
+      afterJson: optionalJson(input.afterJson),
       ip: ip,
       userAgent: userAgent,
-      metadata: input.metadata ? (input.metadata as any) : null,
+      metadata: optionalJson(input.metadata),
     },
   })
 }

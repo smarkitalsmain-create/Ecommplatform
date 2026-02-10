@@ -463,7 +463,7 @@ export function MerchantOrdersPage() {
                         <td className="px-2 py-2">
                           <div className="flex gap-2">
                             <Link href={`/dashboard/orders/${order.id}`}>
-                              <Button variant="outline" size="xs">
+                              <Button variant="outline" size="sm" className="h-8 px-2 text-xs">
                                 View
                               </Button>
                             </Link>
@@ -472,7 +472,8 @@ export function MerchantOrdersPage() {
                               order.stage !== "RETURNED" && (
                                 <Button
                                   variant="ghost"
-                                  size="xs"
+                                  size="sm"
+                                  className="h-8 px-2 text-xs"
                                   onClick={() => handleCancelOrder(order)}
                                   disabled={isMutating}
                                 >

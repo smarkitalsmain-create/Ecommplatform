@@ -28,6 +28,7 @@ import {
 } from "@/lib/validations/onboarding"
 import { Loader2, CheckCircle2 } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
+import { toDateInputValue } from "@/lib/dateUtils"
 
 interface OnboardingFormProps {
   initialData: {
@@ -70,15 +71,15 @@ export function OnboardingForm({ initialData }: OnboardingFormProps) {
   const [isPending, startTransition] = useTransition()
 
   // Step 1: PAN Form
+  // Form uses string for date input, Zod will coerce to Date on submit
   const panForm = useForm<PanStepData>({
     resolver: zodResolver(panStepSchema),
     defaultValues: {
       panType: (initialData.panType as any) || undefined,
       panNumber: initialData.panNumber || "",
       panName: initialData.panName || "",
-      panDobOrIncorp: initialData.panDobOrIncorp
-        ? new Date(initialData.panDobOrIncorp).toISOString().split("T")[0]
-        : "",
+      // Convert Date to string for date input (Zod z.coerce.date() will convert back to Date on submit)
+      panDobOrIncorp: (toDateInputValue(initialData.panDobOrIncorp) || undefined) as any,
       panHolderRole: initialData.panHolderRole || "",
     },
   })

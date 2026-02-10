@@ -50,8 +50,7 @@ export async function POST(
         orderId: order.id,
         type: "NOTE",
         message,
-        oldValue: null,
-        newValue: null,
+        // Omit oldValue and newValue for NOTE type events (optional Json? fields)
         createdBy: "MERCHANT",
       },
     })

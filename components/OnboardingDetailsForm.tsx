@@ -33,6 +33,7 @@ import {
   updateOnboardingBusiness,
 } from "@/app/actions/onboarding"
 import { Lock, Edit2, X, Save } from "lucide-react"
+import { toDateInputValue } from "@/lib/dateUtils"
 
 interface OnboardingDetailsFormProps {
   initialOnboarding: {
@@ -78,9 +79,8 @@ export function OnboardingDetailsForm({
       panType: (initialOnboarding.panType as any) || "INDIVIDUAL",
       panNumber: initialOnboarding.panNumber || "",
       panName: initialOnboarding.panName || "",
-      panDobOrIncorp: initialOnboarding.panDobOrIncorp
-        ? initialOnboarding.panDobOrIncorp.slice(0, 10)
-        : "",
+      // Convert Date to string for date input (Zod z.coerce.date() will convert back to Date on submit)
+      panDobOrIncorp: (toDateInputValue(initialOnboarding.panDobOrIncorp) || undefined) as any,
       panHolderRole: initialOnboarding.panHolderRole || "",
     },
   })
@@ -268,7 +268,7 @@ export function OnboardingDetailsForm({
                 <span className="text-muted-foreground">Date of Birth / Incorporation</span>
                 <span>
                   {initialOnboarding.panDobOrIncorp
-                    ? initialOnboarding.panDobOrIncorp.slice(0, 10)
+                    ? toDateInputValue(initialOnboarding.panDobOrIncorp)
                     : "-"}
                 </span>
               </div>
